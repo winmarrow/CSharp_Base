@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using L_2_5.Enities;
 using L_2_5.Enums;
 using CH = SharedLib.ConsoleHelpers.ConsoleHelper;

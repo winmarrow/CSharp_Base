@@ -23,6 +23,7 @@ namespace L_2_1.Entities
                 var lection = lectionPair.Key;
 
                 CH.WriteSeparator();
+                // TODO Очень какая-то сложная строка. Стоило вынести все строки тут  в константы и работать с переменными которые вы вставляли.
                 Console.WriteLine($"{lection.Type} lection \"{lection.Theme}\" is held { (lection.Type == Knowledge.PhysicalEducation ? "at the univercity stadion": $"in classroom #{lection.Classroom}") }");
                 CH.WriteSeparator();
 
@@ -30,13 +31,27 @@ namespace L_2_1.Entities
 
                 foreach (var human in humansOnLection)
                 {
-                    if(human is Student student) student.Learn(lection.Type);
-                    else if(human is Lecturrer lecturrer) lecturrer.Work(lection.Type);
-                    else
+                    // TODO Оставлю тут немного С# 7.0
+                    switch (human)
                     {
-                        Console.Write($"{human.ToString()} is eating. ");
-                        human.Eat();
+                        case Student student:
+                            student.Learn(lection.Type);
+                            break;
+                        case Lecturrer lecturrer:
+                            lecturrer.Work(lection.Type);
+                            break;
+                        default:
+                            Console.Write($"{human} is eating. ");
+                            human.Eat();
+                            break;
                     }
+                    //if(human is Student student) student.Learn(lection.Type);
+                    //else if(human is Lecturrer lecturrer) lecturrer.Work(lection.Type);
+                    //else
+                    //{
+                    //    Console.Write($"{human.ToString()} is eating. ");
+                    //    human.Eat();
+                    //}
                 }
             }
         }

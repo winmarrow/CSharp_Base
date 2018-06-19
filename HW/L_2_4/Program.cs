@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using L_2_4.Task1;
 using L_2_4.Task2;
 using L_2_4.Task3;
@@ -28,7 +25,8 @@ namespace L_2_4
             Console.ReadKey();
         }
 
-        static void TaskOne() //Тут я тупо не мог ппонять задание, то ли нужна сортировка, а может выборка -Ю налепил лишних методов
+        static void
+            TaskOne() //Тут я тупо не мог ппонять задание, то ли нужна сортировка, а может выборка -Ю налепил лишних методов
         {
             // TODO Задача 1 Делегаты и методы
             /*
@@ -43,10 +41,10 @@ namespace L_2_4
             catalog.Books = new List<Book>()
             {
                 // TODO Добавить книги
-                new Book(){Title = "Book 1 About eat", DoP = new DateTime(1984,1,1)},
-                new Book(){Title = "Book 2 About our little world", DoP = new DateTime(1983,1,1)},
-                new Book(){Title = "Book 3 About cars", DoP = new DateTime(1988,1,1)},
-                new Book(){Title = "Book 4 Around the world in One tick", DoP = new DateTime(1999,1,1)},
+                new Book() {Title = "Book 1 About eat", DoP = new DateTime(1984, 1, 1)},
+                new Book() {Title = "Book 2 About our little world", DoP = new DateTime(1983, 1, 1)},
+                new Book() {Title = "Book 3 About cars", DoP = new DateTime(1988, 1, 1)},
+                new Book() {Title = "Book 4 Around the world in One tick", DoP = new DateTime(1999, 1, 1)},
             };
 
             var booksBefore85Year = catalog.SelectBooks(BookSorter.IsBookBefore85Year);
@@ -58,7 +56,6 @@ namespace L_2_4
             var booksWithWordWorld = catalog.SelectBooks(BookSorter.IsContainsWordWoldInTitle);
             foreach (var book in booksWithWordWorld)
                 Console.WriteLine(book);
-
         }
 
         static void TaskTwo()
@@ -85,11 +82,12 @@ namespace L_2_4
                 new Student(),
                 new Student(),
             });
-            group.Sort((student1, student2) => (int)(student1.AvgMark - student2.AvgMark));
+
+            group.Sort((student1, student2) => (int) (student1.AvgMark - student2.AvgMark));
 
             group.DoSomethingWith(
                 student => true,
-                student =>Console.WriteLine(studentTemplate, student.FirstName, student.LastName, student.AvgMark));
+                student => Console.WriteLine(studentTemplate, student.FirstName, student.LastName, student.AvgMark));
 
             CH.WriteSeparator();
 
@@ -97,12 +95,11 @@ namespace L_2_4
                 student => student.AvgMark >= 4 && student.AvgMark <= 6,
                 student =>
                 {
-                    Console.Write(studentTemplate,student.FirstName,student.LastName,student.AvgMark);
+                    Console.Write(studentTemplate, student.FirstName, student.LastName, student.AvgMark);
                     student.AddToMark(1);
                     Console.Write(" -> ");
                     Console.WriteLine(studentTemplate, student.FirstName, student.LastName, student.AvgMark);
                 });
-
         }
 
         static void TaskThree()
@@ -130,10 +127,38 @@ namespace L_2_4
                 Cars = new List<Car>()
                 {
                     // TODO add cars
-                    new FuelCar(){Brand = "Brand 1", Model = "Model A", Price = 12000m,ReleasedYead = 1990, TankSize = 100},
-                    new FuelCar(){Brand = "Brand 2", Model = "Model A", Price = 1200m,ReleasedYead = 1990, TankSize = 100},
-                    new FuelCar(){Brand = "Brand 3", Model = "Model A", Price = 15000m,ReleasedYead = 1990, TankSize = 100},
-                    new FuelCar(){Brand = "Brand 1", Model = "Model A", Price = 23400m,ReleasedYead = 1990, TankSize = 100},
+                    new FuelCar()
+                    {
+                        Brand = "Brand 1",
+                        Model = "Model A",
+                        Price = 12000m,
+                        ReleasedYead = 1990,
+                        TankSize = 100
+                    },
+                    new FuelCar()
+                    {
+                        Brand = "Brand 2",
+                        Model = "Model A",
+                        Price = 1200m,
+                        ReleasedYead = 1990,
+                        TankSize = 100
+                    },
+                    new FuelCar()
+                    {
+                        Brand = "Brand 3",
+                        Model = "Model A",
+                        Price = 15000m,
+                        ReleasedYead = 1990,
+                        TankSize = 100
+                    },
+                    new FuelCar()
+                    {
+                        Brand = "Brand 1",
+                        Model = "Model A",
+                        Price = 23400m,
+                        ReleasedYead = 1990,
+                        TankSize = 100
+                    },
                 }
             };
             //Before sort
@@ -142,7 +167,7 @@ namespace L_2_4
 
             CH.WriteSeparator();
 
-            group.SortCars((car1, car2) => (int)(car1.Price - car2.Price));
+            group.SortCars((car1, car2) => (int) (car1.Price - car2.Price));
             //After sort
             foreach (var car in group.Cars)
                 Console.WriteLine(carTempolate, car.Brand, car.Model, car.Price);
@@ -153,8 +178,6 @@ namespace L_2_4
             //Selected
             foreach (var car in brand1Cars)
                 Console.WriteLine(carTempolate, car.Brand, car.Model, car.Price);
-
-
         }
     }
 }

@@ -22,9 +22,9 @@ namespace L_2_1.Entities
             
         }
 
-        public override string ToString()
-        {
-            return $"Lecturrer: {FullName}";
-        }
+        //public override string ToString()
+        //{
+        //    return $"Lecturrer: {FullName}";
+        //}
     }
 }

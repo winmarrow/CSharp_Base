@@ -2,8 +2,8 @@
 
 namespace L_2_2.Abstractions
 {
-    public abstract class HomoSapiensFromUnivercity
-        : HomoSapiens
+    public abstract class HomoSapiensFromUnivercity: HomoSapiens
+    // TODO опять же тут нету абстрактности.
     {
         public string Department { get; set; }
 

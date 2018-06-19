@@ -3,7 +3,8 @@ using System;
 
 namespace L_2_2.Abstractions
 {
-    public abstract class HomoSapiens
+    public abstract class HomoSapiens // TODO что же в этом классе абстрактного? =)
+    // TODO В таких случаях класс не делают абстрактным, просто его конструктор делают protected
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

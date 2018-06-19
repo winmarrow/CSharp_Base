@@ -22,7 +22,10 @@ namespace L_2_5.Enities
         {
             if (eventArgs.Category.HasFlag(Interests))
                 GotNews((sender as INewsOperator).GetByIndex(eventArgs.NewsIndex));
-
+            // TODO Я бы развернул такой пул реквест.
+            // Мне не нравиться что у вас подписчик ходить в новостное агентство и забирает новость
+            // Тут прекрасно может приходить новость, и подписчику не обязательно знать откуда в данном случае.
+            // А уж тем более ходить и забирать что он там получил.
         }
 
         private void GotNews(News news)

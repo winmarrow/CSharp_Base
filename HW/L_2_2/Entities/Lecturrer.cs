@@ -3,8 +3,7 @@ using L_2_2.Abstractions;
 
 namespace L_2_2.Entities
 {
-    public class Lecturer
-        : HomoSapiensFromUnivercity
+    public class Lecturer: HomoSapiensFromUnivercity
     {
         public string CourseName { get; protected set; }
 
@@ -28,7 +27,7 @@ namespace L_2_2.Entities
 
         public override void Work()
         {
-            Console.WriteLine($"{this.ToString()}, is teaching course \"{CourseName}\"");
+            Console.WriteLine($"{this}, is teaching course \"{CourseName}\"");
         }
     }
 }

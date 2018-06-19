@@ -39,16 +39,16 @@ namespace L_2_5.Enities
             return this[index];
         }
 
-        public News this[int index]
-        {
-            get
-            {
-                if (index < 0 && index > _news.Count - 1) return new News();
-
-                return _news[index];
-            }
-        }
-
+        //public News this[int index]
+        //{
+        //    get
+        //    {
+        //        if (index < 0 && index > _news.Count - 1) return new News();
+        //        return _news[index];
+        //    }
+        //}
+        // TODO Да ладно вы же используете новый синтаксис, а это всего лишь 6.0
+        public News this[int index] => index >= 0 && index < _news.Count ? _news[index] : new News();
 
         public void Subscribe(INewsSubscriber newsSubscriber)
         {

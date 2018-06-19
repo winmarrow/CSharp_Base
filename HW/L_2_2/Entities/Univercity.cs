@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using L_2_2.Collections;
+﻿using L_2_2.Collections;
 using SharedLib.Abstract;
 using SharedLib.ConsoleHelpers;
 
@@ -20,7 +18,7 @@ namespace L_2_2.Entities
         public University()
         {
             _logger = new ConsoleLogger();
-
+            // TODO Тогда уже могли вообще всё в одну лекцию сделать
             Students = new HomoSapiensCollection(_logger);
             Lecturers = new HomoSapiensCollection(_logger);
             HedLecturrers = new HomoSapiensCollection(_logger);

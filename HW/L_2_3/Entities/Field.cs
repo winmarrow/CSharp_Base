@@ -7,7 +7,7 @@ namespace L_2_3.Entities
 {
     public class Field
     {
-        
+        // TODO ReadOnly
         private List<IAnimal> _rabbits;
         private List<IAnimal> _tigers;
         private int _grassCount;
@@ -32,6 +32,7 @@ namespace L_2_3.Entities
                 _tigers.Add(new Tiger());
         }
 
+        // TODO Слишком большой метод. Стоило добавить класс GameActions и там распилить этот метод.
         public void NextStep()
         {
             var deadRabbits = new List<IAnimal>();
@@ -52,12 +53,14 @@ namespace L_2_3.Entities
                 }
 
                 rabbit.Sleep();
-
+                // TODO Голодный кролик после того как поест спит 2 раза.
             }
 
             foreach (var deadRabbit in deadRabbits)
                 _rabbits.Remove(deadRabbit);
 
+            // TODO Вот тут есть копипаст. Но чтобы от него избавиться надо постараться сделать логику более общее.
+            // у вас есть животные и их вкусовые предпочтения - Если что-то на клетке отвечает этим предпочтениям, то можно кушать
             foreach (var tiger in _tigers)
             {
                 if (tiger.IsHunger)
@@ -99,7 +102,6 @@ namespace L_2_3.Entities
             _grassCount += _grassCount/10 + 10 * deadTigers.Count;
 
             WriteFieldStatus();
-
         }
 
         private void WriteFieldStatus()
