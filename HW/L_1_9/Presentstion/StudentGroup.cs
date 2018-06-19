@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using L_1_9.Presentstion;
 
 namespace HW_Lecture_1_9.Presentation
@@ -28,7 +27,7 @@ namespace HW_Lecture_1_9.Presentation
                 _students.RemoveAt(index);
         }
 
-        //Indexator
+        //Indexation
         public Student this[int index]
         {
             get

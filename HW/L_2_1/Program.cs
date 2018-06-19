@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using L_2_1.Entities;
 using L_2_1.Entities.Students;
 using L_2_1.Enums;

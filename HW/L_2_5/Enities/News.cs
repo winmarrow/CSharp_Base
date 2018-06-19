@@ -1,5 +1,4 @@
-﻿using System;
-using L_2_5.Enums;
+﻿using L_2_5.Enums;
 
 namespace L_2_5.Enities
 {

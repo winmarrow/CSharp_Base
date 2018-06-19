@@ -23,7 +23,7 @@ namespace L_2_2.Entities
 
         public override void Work()
         {
-            Console.WriteLine($"{this.ToString()}, is controlling his department with authority level \"{AuthorityLevel}\"");
+            Console.WriteLine($"{this}, is controlling his department with authority level \"{AuthorityLevel}\"");
         }
     }
 }

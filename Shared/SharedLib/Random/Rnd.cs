@@ -1,5 +1,4 @@
 ﻿using System;
-using RandomNameGeneratorLibrary;
 
 namespace SharedLib.Random
 {

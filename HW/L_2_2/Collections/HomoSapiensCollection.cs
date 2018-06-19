@@ -11,6 +11,7 @@ namespace L_2_2.Collections
         private const string AlreadyExistErrorString = "Same item already exist in collection";
         private const string AddItemString = "Item was successfully added";
 
+        // TODO readonly;
         private Logger _logger;
 
         public HomoSapiensCollection(Logger logger)

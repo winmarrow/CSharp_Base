@@ -17,12 +17,15 @@ namespace L_2_1.Entities
         }
         public void Sleep()
         {
+            // TODO вызов ToString можно опустить. Интерполяция сама его вызовет.
             Console.WriteLine($"{this.ToString()} is sleeping - \"Z-z-Z\"");
         }
 
         public override string ToString()
         {
-            return $"Human: {FullName}";
+            // TODO В вашем случае можно было сделать этот метод более гибким. Вы же печатаете лишь тип
+            return $"{this.GetType().Name}: {FullName}";
+            //return $"Human: {FullName}";
         }
     }
 }
