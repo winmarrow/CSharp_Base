@@ -1,6 +1,6 @@
 ﻿using System;
 using L_2_3.Entities;
-using CH = SharedLib.ConsoleHelpers.ConsoleHelper;
+using CH = SharedLib.Helpers.ConsoleHelper;
 
 namespace L_2_3
 {

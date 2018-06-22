@@ -1,7 +1,7 @@
 ﻿using System;
 using SharedLib.Abstract;
 
-namespace SharedLib.ConsoleHelpers
+namespace SharedLib.Loggers
 {
     public sealed class ConsoleLogger : Logger
     {

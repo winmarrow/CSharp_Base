@@ -2,7 +2,7 @@
 using System.Text;
 using SharedLib.Structs;
 
-namespace SharedLib.ConsoleHelpers
+namespace SharedLib.Helpers
 {
     public static class ConsoleHelper
     {

@@ -2,7 +2,7 @@
 using System.Text;
 using System.Threading;
 using SharedLib.Structs;
-using CH = SharedLib.ConsoleHelpers.ConsoleHelper;
+using CH = SharedLib.Helpers.ConsoleHelper;
 
 namespace L_1_5
 {

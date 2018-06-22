@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using L_2_4.Task1;
 using L_2_4.Task2;
 using L_2_4.Task3;
-using CH = SharedLib.ConsoleHelpers.ConsoleHelper;
+using CH = SharedLib.Helpers.ConsoleHelper;
 
 namespace L_2_4
 {
@@ -37,13 +37,15 @@ namespace L_2_4
              3. Вывести в консоль книги написанные до 85ого года. Передав статический метод и BookSorter-a
              4. Вывести книги написаны в названии которых есть слово "мир"
              */
-            var catalog = new Catalog();
-            catalog.Books = new List<Book>
+            var catalog = new Catalog
             {
-                new Book {Title = "Book 1 About eat", DoP = new DateTime(1984, 1, 1)},
-                new Book {Title = "Book 2 About our little world", DoP = new DateTime(1983, 1, 1)},
-                new Book {Title = "Book 3 About cars", DoP = new DateTime(1988, 1, 1)},
-                new Book {Title = "Book 4 Around the world in One tick", DoP = new DateTime(1999, 1, 1)}
+                Books = new List<Book>
+                {
+                    new Book {Title = "Book 1 About eat", DoP = new DateTime(1984, 1, 1)},
+                    new Book {Title = "Book 2 About our little world", DoP = new DateTime(1983, 1, 1)},
+                    new Book {Title = "Book 3 About cars", DoP = new DateTime(1988, 1, 1)},
+                    new Book {Title = "Book 4 Around the world in One tick", DoP = new DateTime(1999, 1, 1)}
+                }
             };
 
             var booksBefore85Year = catalog.SelectBooks(BookSorter.IsBookBefore85Year);
@@ -82,7 +84,7 @@ namespace L_2_4
                 new Student()
             });
 
-            group.Sort((student1, student2) => (int) (student1.AvgMark - student2.AvgMark));
+            group.Sort((student1, student2) => (int)(student1.AvgMark - student2.AvgMark));
 
             group.DoSomethingWith(
                 student => true,
@@ -165,7 +167,7 @@ namespace L_2_4
 
             CH.WriteSeparator();
 
-            group.SortCars((car1, car2) => (int) (car1.Price - car2.Price));
+            group.SortCars((car1, car2) => (int)(car1.Price - car2.Price));
             //After sort
             foreach (var car in group.Cars)
                 Console.WriteLine(carTempolate, car.Brand, car.Model, car.Price);

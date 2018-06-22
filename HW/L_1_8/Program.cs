@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using L_1_8.Entities;
-using CH = SharedLib.ConsoleHelpers.ConsoleHelper;
+using CH = SharedLib.Helpers.ConsoleHelper;
 
 namespace L_1_8
 {

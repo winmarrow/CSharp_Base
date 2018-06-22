@@ -42,6 +42,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Absractions\AlbumSerializer.cs" />
+    <Compile Include="Entities\Album.cs" />
+    <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Entities\BinaryAlbumSerializer.cs" />
+    <Compile Include="Entities\Track.cs" />
+    <Compile Include="Interfaces\ICanLoadAlbum.cs" />
+    <Compile Include="Interfaces\IEntity.cs" />
+    <Compile Include="Interfaces\ICanSaveAlbum.cs" />
+    <Compile Include="Interfaces\IAlbumSerializer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,6 +1,6 @@
 ﻿using System;
 using L_1_9.Attachment.Enities;
-using CH = SharedLib.ConsoleHelpers.ConsoleHelper;
+using CH = SharedLib.Helpers.ConsoleHelper;
 
 namespace L_1_9
 {

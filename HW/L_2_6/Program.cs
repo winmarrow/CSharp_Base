@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using L_2_6.Entities;
 using L_2_6.Exceptions;
-using SharedLib.ConsoleHelpers;
-using CH = SharedLib.ConsoleHelpers.ConsoleHelper;
+using SharedLib.Loggers;
+using CH = SharedLib.Helpers.ConsoleHelper;
 
 namespace L_2_6
 {

@@ -1,5 +1,5 @@
 ﻿using System;
-using CH = SharedLib.ConsoleHelpers.ConsoleHelper;
+using CH = SharedLib.Helpers.ConsoleHelper;
 
 namespace L_1_4
 {

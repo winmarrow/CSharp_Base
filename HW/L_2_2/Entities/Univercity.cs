@@ -1,7 +1,7 @@
 ﻿using L_2_2.Collections;
 using SharedLib.Abstract;
-using SharedLib.ConsoleHelpers;
-using CH = SharedLib.ConsoleHelpers.ConsoleHelper;
+using SharedLib.Loggers;
+using CH = SharedLib.Helpers.ConsoleHelper;
 
 namespace L_2_2.Entities
 {

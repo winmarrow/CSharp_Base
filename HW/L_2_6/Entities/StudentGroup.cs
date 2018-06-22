@@ -28,10 +28,9 @@ namespace L_2_6.Entities
         }
 
         public string GropName { get; set; }
-
-
         public IEnumerable<Student> Students => _students.AsEnumerable();
         public Student this[int index] => _students[index];
+
         public event EventHandler<StudentCollectinChangedEventArgs> OnCollectionChange;
         public event EventHandler<InvalidStudentInputEventArgs> OnInvalidInput;
 

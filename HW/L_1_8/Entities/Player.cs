@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading;
-using SharedLib.ConsoleHelpers;
+using SharedLib.Helpers;
 
 namespace L_1_8.Entities
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using L_2_5.Enities;
 using L_2_5.Enums;
-using CH = SharedLib.ConsoleHelpers.ConsoleHelper;
+using CH = SharedLib.Helpers.ConsoleHelper;
 
 namespace L_2_5
 {
