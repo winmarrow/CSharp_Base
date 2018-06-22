@@ -2,13 +2,11 @@
 
 namespace L_2_1.Entities.Students
 {
-    public class TechStudent
-        : Student
+    public class TechStudent : Student
     {
         public TechStudent(string fullName)
-            :base(fullName, Knowledge.Math | Knowledge.Phythics | Knowledge.Chemistry)
+            : base(fullName, Knowledge.Math | Knowledge.Phythics | Knowledge.Chemistry)
         {
-            
         }
     }
 }

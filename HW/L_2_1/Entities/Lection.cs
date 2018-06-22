@@ -4,11 +4,6 @@ namespace L_2_1.Entities
 {
     public class Lection
     {
-        // TODO Сеттеры могут быть опущены или сделанными приватными
-        public Knowledge Type { get; set; }
-        public string Theme { get; set; }
-        public int Classroom { get; set; }
-
         public Lection()
         {
         }
@@ -19,5 +14,9 @@ namespace L_2_1.Entities
             Theme = theme;
             Classroom = classroom;
         }
+
+        public Knowledge Type { get; }
+        public string Theme { get; }
+        public int Classroom { get; }
     }
 }

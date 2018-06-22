@@ -14,6 +14,7 @@ namespace L_2_4.Task3
             return car != null
                    && !string.IsNullOrWhiteSpace(car.Brand)
                    && !string.IsNullOrWhiteSpace(car.Model)
+                   && car.ReleasedYead >= 1900
                    && car.ReleasedYead <= DateTime.Now.Year
                    && car.Price > 0M;
         }

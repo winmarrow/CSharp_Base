@@ -8,25 +8,6 @@ namespace HW_Lecture_1_9.Presentation
         //Collection
         private readonly List<Student> _students = new List<Student>();
 
-        //Add
-        public void Add(Student student)
-        {
-            if(Student.IsStudentValid(student))
-                _students.Add(student);
-        }
-
-        //Remove
-        public void Remove(Student student)
-        {
-            if (Student.IsStudentValid(student) && _students.Contains(student))
-                _students.Add(student);
-        }
-        public void RemoveAt(int index)
-        {
-            if(index> 0 && index < _students.Count)
-                _students.RemoveAt(index);
-        }
-
         //Indexation
         public Student this[int index]
         {
@@ -37,6 +18,26 @@ namespace HW_Lecture_1_9.Presentation
 
                 return null;
             }
+        }
+
+        //Add
+        public void Add(Student student)
+        {
+            if (Student.IsStudentValid(student))
+                _students.Add(student);
+        }
+
+        //Remove
+        public void Remove(Student student)
+        {
+            if (Student.IsStudentValid(student) && _students.Contains(student))
+                _students.Add(student);
+        }
+
+        public void RemoveAt(int index)
+        {
+            if (index > 0 && index < _students.Count)
+                _students.RemoveAt(index);
         }
     }
 }

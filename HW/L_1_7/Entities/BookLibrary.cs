@@ -22,6 +22,7 @@ namespace L_1_7.Entities
 
             return true;
         }
+
         public bool AddBook(Book book)
         {
             if (!Book.IsBookValid(book) || !Author.IsAuthorValid(book.Author)) return false;

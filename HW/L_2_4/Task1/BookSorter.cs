@@ -9,13 +9,17 @@ namespace L_2_4.Task1
         public static List<Book> SortByTitle(IEnumerable<Book> books)
         {
             var result = books.ToList();
-            result.Sort((book1, book2) => String.Compare(book1.Title, book2.Title, StringComparison.Ordinal));
+            result.Sort(delegate(Book book1, Book book2)
+            {
+                return string.Compare(book1.Title, book2.Title, StringComparison.Ordinal);
+            });
             return result;
         }
+
         public static List<Book> SortByDoP(IEnumerable<Book> books)
         {
             var result = books.ToList();
-            result.Sort((book1, book2) => book1.DoP.CompareTo(book2.DoP));
+            result.Sort(delegate(Book book1, Book book2) { return book1.DoP.CompareTo(book2.DoP); });
             return result;
         }
 

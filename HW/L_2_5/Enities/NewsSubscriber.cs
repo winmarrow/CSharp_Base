@@ -7,9 +7,8 @@ namespace L_2_5.Enities
 {
     public class NewsSubscriber : INewsSubscriber
     {
-        private const string NewsDisplayTemplate = "News from categories: [{0}]\n-Title: \"{1}\"\n-Description: {2}\n\t{3}";
-
-        public NewsCategory Interests { get; private set; }
+        private const string NewsDisplayTemplate =
+            "News from categories: [{0}]\n-Title: \"{1}\"\n-Description: {2}\n\t{3}";
 
         public List<News> MyNews = new List<News>();
 
@@ -18,14 +17,12 @@ namespace L_2_5.Enities
             Interests = interests;
         }
 
+        public NewsCategory Interests { get; set; }
+
         public void OnNewNews(object sender, NewNewsEventArgs eventArgs)
         {
-            if (eventArgs.Category.HasFlag(Interests))
-                GotNews((sender as INewsOperator).GetByIndex(eventArgs.NewsIndex));
-            // TODO Я бы развернул такой пул реквест.
-            // Мне не нравиться что у вас подписчик ходить в новостное агентство и забирает новость
-            // Тут прекрасно может приходить новость, и подписчику не обязательно знать откуда в данном случае.
-            // А уж тем более ходить и забирать что он там получил.
+            if (eventArgs.News.Category.HasFlag(Interests))
+                GotNews(eventArgs.News);
         }
 
         private void GotNews(News news)

@@ -1,23 +1,21 @@
 ﻿using System;
-using L_2_2.Abstractions;
 
 namespace L_2_2.Entities
 {
-    public class HeadLecturrer
-        : HomoSapiensFromUnivercity
+    public class HeadLecturrer : HumanFromUnivercity
     {
-        public int AuthorityLevel { get; protected set; }
-
         public HeadLecturrer(string firstName, string lastName, string department, int authorityLevel)
             : base(firstName, lastName, department)
         {
             AuthorityLevel = authorityLevel;
         }
 
+        public int AuthorityLevel { get; protected set; }
+
         public override bool Equals(object obj)
         {
-            return obj is HeadLecturrer headOfTheDepartment
-                   && headOfTheDepartment.AuthorityLevel == this.AuthorityLevel
+            return obj is HeadLecturrer headLecturrer
+                   && headLecturrer.AuthorityLevel == AuthorityLevel
                    && base.Equals(obj);
         }
 

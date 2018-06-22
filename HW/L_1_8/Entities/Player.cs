@@ -24,7 +24,7 @@ namespace L_1_8.Entities
             Console.WriteLine($"Playing album - {album.Title} from {fromSongIndex + 1} to {toSongIndex + 1}");
             ConsoleHelper.WriteSeparator();
 
-            for (int i = fromSongIndex; i < toSongIndex; i++)
+            for (var i = fromSongIndex; i < toSongIndex; i++)
             {
                 Console.Write($"#{i}: ");
                 WriteSongInfo(album[i]);
@@ -41,12 +41,14 @@ namespace L_1_8.Entities
 
         private void WriteAlbumInfo(Album album)
         {
-            int duration = 0;
+            var duration = 0;
             foreach (var song in album.Songs)
                 duration += song.Duration;
 
-            Console.WriteLine("Album \"{0}\": {1} - Songs : All songs duration is {2} s", album.Title, album.Songs.Count, duration/1000);
+            Console.WriteLine("Album \"{0}\": {1} - Songs : All songs duration is {2} s", album.Title,
+                album.Songs.Count, duration / 1000);
         }
+
         private void WriteSongInfo(Song song)
         {
             Console.WriteLine("{0} - \"{1}\": {2} mc",

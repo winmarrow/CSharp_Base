@@ -7,9 +7,8 @@ namespace L_2_3.Entities
 {
     public class Field
     {
-        // TODO ReadOnly
-        private List<IAnimal> _rabbits;
-        private List<IAnimal> _tigers;
+        private readonly List<IAnimal> _rabbits;
+        private readonly List<IAnimal> _tigers;
         private int _grassCount;
 
         public Field(int width, int height)
@@ -25,10 +24,10 @@ namespace L_2_3.Entities
             _rabbits.Clear();
             _tigers.Clear();
 
-            for (int i = 0; i < rabbitCount; i++)
+            for (var i = 0; i < rabbitCount; i++)
                 _rabbits.Add(new Rabbit());
 
-            for (int i = 0; i < tigerCount; i++)
+            for (var i = 0; i < tigerCount; i++)
                 _tigers.Add(new Tiger());
         }
 
@@ -41,7 +40,6 @@ namespace L_2_3.Entities
             foreach (var rabbit in _rabbits)
             {
                 if (rabbit.IsHunger)
-                {
                     if (_grassCount > 0)
                     {
                         _grassCount--;
@@ -49,8 +47,9 @@ namespace L_2_3.Entities
                         rabbit.Sleep();
                     }
                     else
+                    {
                         deadRabbits.Add(rabbit);
-                }
+                    }
 
                 rabbit.Sleep();
                 // TODO Голодный кролик после того как поест спит 2 раза.
@@ -64,42 +63,33 @@ namespace L_2_3.Entities
             foreach (var tiger in _tigers)
             {
                 if (tiger.IsHunger)
-                {
                     if (deadRabbits.Count > 0)
                     {
-                        deadRabbits.RemoveAt(deadRabbits.Count-1);
+                        deadRabbits.RemoveAt(deadRabbits.Count - 1);
                         tiger.Eat();
                     }
                     else if (_rabbits.Count > 0)
                     {
-                        _rabbits.RemoveAt(_rabbits.Count -1);
+                        _rabbits.RemoveAt(_rabbits.Count - 1);
                         tiger.Eat();
                     }
                     else
+                    {
                         deadTigers.Add(tiger);
-                }
+                    }
 
                 tiger.Sleep();
             }
 
-            foreach (var deadTiger in deadTigers)
-            {
-                _tigers.Remove(deadTiger);
-            }
+            foreach (var deadTiger in deadTigers) _tigers.Remove(deadTiger);
 
             var rabbitPairs = _rabbits.Count / 2;
-            for (int i = 0; i < rabbitPairs; i++)
-            {
-                _rabbits.Add(new Rabbit());
-            }
+            for (var i = 0; i < rabbitPairs; i++) _rabbits.Add(new Rabbit());
 
             var tigerPairs = _tigers.Count;
-            for (int i = 0; i <tigerPairs / 2; i++)
-            {
-                _tigers.Add(new Tiger());
-            }
+            for (var i = 0; i < tigerPairs / 2; i++) _tigers.Add(new Tiger());
 
-            _grassCount += _grassCount/10 + 10 * deadTigers.Count;
+            _grassCount += _grassCount / 10 + 10 * deadTigers.Count;
 
             WriteFieldStatus();
         }
@@ -107,8 +97,9 @@ namespace L_2_3.Entities
         private void WriteFieldStatus()
         {
             CH.WriteSeparator();
-            Console.WriteLine($"On field:\n -Grass count {_grassCount}\n -Rabbits count: {_rabbits.Count}\n -Tigers count: {_tigers.Count}");
-            if(_rabbits.Count == 0 && _tigers.Count == 0)
+            Console.WriteLine(
+                $"On field:\n -Grass count {_grassCount}\n -Rabbits count: {_rabbits.Count}\n -Tigers count: {_tigers.Count}");
+            if (_rabbits.Count == 0 && _tigers.Count == 0)
                 Console.WriteLine("\tAll dead");
         }
     }

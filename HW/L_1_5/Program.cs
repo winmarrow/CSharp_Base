@@ -6,12 +6,12 @@ using CH = SharedLib.ConsoleHelpers.ConsoleHelper;
 
 namespace L_1_5
 {
-    class Program
+    internal class Program
     {
-        const int LineSize = 20; //15; // длина бегущей строки, 15 маловато
-        const int SleepInterval = 150; //Интервал обновления
+        private const int LineSize = 20; //15; // длина бегущей строки, 15 маловато
+        private const int SleepInterval = 150; //Интервал обновления
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             CH.SetConsoleOutputEncoding();
             CH.SetConsoleColor();
@@ -20,9 +20,6 @@ namespace L_1_5
 
             //Varian_1_Old();
             Variant_2_New();
-
-
-
         }
 
         private static void Varian_1_Old()
@@ -47,32 +44,34 @@ namespace L_1_5
             Console.WriteLine(new string(borederBottomChar, LineSize + 2));
 
             //Забиваем все строки в буфер
-            StringBuilder buffer = new StringBuilder(new string(spaceChar, LineSize));
-            foreach (string str in strings)
+            var buffer = new StringBuilder(new string(spaceChar, LineSize));
+            foreach (var str in strings)
                 buffer.Append(str);
 
             buffer.Replace(spaceChar, backgroundChar); //Устанавливаем символ для фона
 
             Console.ForegroundColor = ConsoleColor.DarkYellow; //Цвет текста
-            string oldTime = timeMark;
-            int currentPosition = 0;
+            var oldTime = timeMark;
+            var currentPosition = 0;
 
             while (true)
             {
                 //'Обновляем' время в буфере, если оно изменилось
-                string newTime = DateTime.Now.ToLongTimeString();
+                var newTime = DateTime.Now.ToLongTimeString();
                 if (!newTime.Equals(oldTime))
                 {
                     buffer.Replace(oldTime, newTime);
                     oldTime = newTime;
                 }
 
-                int charsToBufferEnd = buffer.Length - currentPosition; // Находим остаток до конца буфера
+                var charsToBufferEnd = buffer.Length - currentPosition; // Находим остаток до конца буфера
 
                 Console.SetCursorPosition(1, 1); // прыгаем в начало бегущей стоки
 
                 if (charsToBufferEnd >= LineSize) //если хватает то виыводим так
+                {
                     Console.Write(buffer.ToString(currentPosition, LineSize));
+                }
                 else // если нет, то добисываем с начала буфера
                 {
                     Console.Write(buffer.ToString(currentPosition, charsToBufferEnd));
@@ -92,42 +91,44 @@ namespace L_1_5
             const int offsetLeft = 20;
             const int offsetTop = 20;
 
-            string timeString =
+            var timeString =
                 $"Минское время {digitsTemolate}:{digitsTemolate}:{digitsTemolate}. Говорят и показывают все телестанции страны... "; //выводиая строка
 
-            char[] buffer = timeString.ToCharArray();
-            int hoursIndex = timeString.IndexOf(digitsTemolate);
-            int munitsIndex = timeString.IndexOf(digitsTemolate, hoursIndex + 1);
-            int secondsIndex = timeString.IndexOf(digitsTemolate, munitsIndex + 1);
+            var buffer = timeString.ToCharArray();
+            var hoursIndex = timeString.IndexOf(digitsTemolate);
+            var munitsIndex = timeString.IndexOf(digitsTemolate, hoursIndex + 1);
+            var secondsIndex = timeString.IndexOf(digitsTemolate, munitsIndex + 1);
 
             //Выводим рамку
             CH.DrawRect(new Position(offsetLeft - 1, offsetTop - 1), new Size(LineSize, 1));
 
             CH.SetConsoleColor(ConsoleColor.DarkYellow); //Цвет текста
 
-            int currentPosition = 0;
+            var currentPosition = 0;
 
             while (true)
             {
                 //'Обновляем' время в буфере, если оно изменилось
-                DateTime newTime = DateTime.Now;
+                var newTime = DateTime.Now;
 
-                buffer[hoursIndex] = newTime.Hour < 10 ? '0' : (Char)(newTime.Hour / 10 + digitsOffset);
-                buffer[hoursIndex + 1] = (Char)(newTime.Hour % 10 + digitsOffset);
+                buffer[hoursIndex] = newTime.Hour < 10 ? '0' : (char) (newTime.Hour / 10 + digitsOffset);
+                buffer[hoursIndex + 1] = (char) (newTime.Hour % 10 + digitsOffset);
 
-                buffer[munitsIndex] = newTime.Minute < 10 ? '0' : (Char)(newTime.Minute / 10 + digitsOffset);
-                buffer[munitsIndex + 1] = (Char)(newTime.Minute % 10 + digitsOffset);
+                buffer[munitsIndex] = newTime.Minute < 10 ? '0' : (char) (newTime.Minute / 10 + digitsOffset);
+                buffer[munitsIndex + 1] = (char) (newTime.Minute % 10 + digitsOffset);
 
-                buffer[secondsIndex] = newTime.Second < 10 ? '0' : (Char)(newTime.Second / 10 + digitsOffset);
-                buffer[secondsIndex + 1] = (Char)(newTime.Second % 10 + digitsOffset);
+                buffer[secondsIndex] = newTime.Second < 10 ? '0' : (char) (newTime.Second / 10 + digitsOffset);
+                buffer[secondsIndex + 1] = (char) (newTime.Second % 10 + digitsOffset);
 
 
-                int charsToStringEnd = buffer.Length - currentPosition; // Находим остаток до конца буфера
+                var charsToStringEnd = buffer.Length - currentPosition; // Находим остаток до конца буфера
 
                 Console.SetCursorPosition(offsetLeft, offsetTop); // прыгаем в начало бегущей стоки
 
                 if (charsToStringEnd >= LineSize) //если хватает то виыводим так
+                {
                     Console.Write(buffer, currentPosition, LineSize);
+                }
                 else // если нет, то добисываем с начала буфера
                 {
                     Console.Write(buffer, currentPosition, charsToStringEnd);

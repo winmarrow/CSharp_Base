@@ -4,13 +4,13 @@ using CH = SharedLib.ConsoleHelpers.ConsoleHelper;
 
 namespace L_1_2
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             CH.SetConsoleOutputEncoding();
             CH.SetConsoleColor();
-            
+
             //output caption
             CH.WriteSeparator();
             Console.WriteLine("\t\t\t\t\t\t- Sphere Calculator -");
@@ -20,33 +20,36 @@ namespace L_1_2
 
             //input radius of sphere
             CH.WriteSeparator();
-            string separator = CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
+            var separator = CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
 
             double sphereRadius;
             string sphereRadiusString;
 
             do
             {
-                sphereRadiusString = CH.GetStringFromConsole($"Please enter the radius (R) of your sphere in meters (m) [you must separate of number parts with \"{separator}\" char]");
-                 
+                sphereRadiusString = CH.GetStringFromConsole(
+                    $"Please enter the radius (R) of your sphere in meters (m) [you must separate of number parts with \"{separator}\" char]");
             } while (!double.TryParse(sphereRadiusString, out sphereRadius));
-            
-            
+
+
             //convertation & calculations
 
-            double sphereV = 4.0 / 3.0 * Math.PI * Math.Pow(sphereRadius, 3.0);
-            double sphereA = 4.0 * Math.PI * Math.Pow(sphereRadius, 2.0);
+            var sphereV = 4.0 / 3.0 * Math.PI * Math.Pow(sphereRadius, 3.0);
+            var sphereA = 4.0 * Math.PI * Math.Pow(sphereRadius, 2.0);
 
             //output results
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             CH.WriteSeparator();
 
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("\tVolume=(4/3)\u03C0R\u00B3={0:0.###} m\u00B3{1}\tArea=(4/3)\u03C0R\u00B3={2:0.###} m\u00B2", sphereV, Environment.NewLine, sphereA);
+            Console.WriteLine(
+                "\tVolume=(4/3)\u03C0R\u00B3={0:0.###} m\u00B3{1}\tArea=(4/3)\u03C0R\u00B3={2:0.###} m\u00B2", sphereV,
+                Environment.NewLine, sphereA);
 
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             CH.WriteSeparator();
-            Console.WriteLine($"\tThank you for using our program, we hope it helped you :D {Environment.NewLine}\tGoodbye!");
+            Console.WriteLine(
+                $"\tThank you for using our program, we hope it helped you :D {Environment.NewLine}\tGoodbye!");
 
             //exit
             Console.ReadKey();

@@ -1,17 +1,16 @@
 ﻿using System;
-using L_2_2.Abstractions;
 
 namespace L_2_2.Entities
 {
-    public class Lecturer: HomoSapiensFromUnivercity
+    public class Lecturer : HumanFromUnivercity
     {
-        public string CourseName { get; protected set; }
-
         public Lecturer(string firstName, string lastName, string department, string courseName)
             : base(firstName, lastName, department)
         {
             CourseName = courseName;
         }
+
+        public string CourseName { get; protected set; }
 
         public void ChangeCourse(string courseName)
         {
@@ -21,7 +20,7 @@ namespace L_2_2.Entities
         public override bool Equals(object obj)
         {
             return obj is Lecturer lecturer
-                   && lecturer.CourseName == this.CourseName
+                   && lecturer.CourseName == CourseName
                    && base.Equals(obj);
         }
 

@@ -2,18 +2,18 @@
 {
     public class Book
     {
-        public string Title;
-        public BookGenge Genre;
         public Author Author;
+        public BookGenge Genre;
 
         public bool IsAvailable;
+        public string Title;
 
         public override bool Equals(object obj)
         {
-            return obj is Book book 
-                   && book.Title == this.Title 
-                   && book.Genre == this.Genre
-                   && book.Author == this.Author;
+            return obj is Book book
+                   && book.Title == Title
+                   && book.Genre == Genre
+                   && book.Author == Author;
         }
 
         //Static

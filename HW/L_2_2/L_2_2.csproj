@@ -42,9 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Collections\HomoSapiensCollection.cs" />
-    <Compile Include="Abstractions\HomoSapiens.cs" />
-    <Compile Include="Abstractions\HumanFromUnivercity.cs" />
+    <Compile Include="Collections\HumanCollection.cs" />
+    <Compile Include="Abstractions\Human.cs" />
+    <Compile Include="Entities\HumanFromUnivercity.cs" />
     <Compile Include="Entities\HeadLecturrer.cs" />
     <Compile Include="Entities\Lecturrer.cs" />
     <Compile Include="Entities\Student.cs" />

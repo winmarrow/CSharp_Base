@@ -3,9 +3,9 @@ using CH = SharedLib.ConsoleHelpers.ConsoleHelper;
 
 namespace L_1_4
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             CH.SetConsoleOutputEncoding();
             CH.SetConsoleColor();
@@ -15,9 +15,9 @@ namespace L_1_4
             const string invalidInputMsg = "Введены неверные значения...";
             const string outMsg = "{0,10}";
 
-            string inputString = CH.GetStringFromConsole(inputMsg);
+            var inputString = CH.GetStringFromConsole(inputMsg);
 
-            if (!uint.TryParse(inputString, out uint n))
+            if (!uint.TryParse(inputString, out var n))
             {
                 Console.WriteLine(invalidInputMsg);
                 Console.ReadKey();
@@ -27,16 +27,17 @@ namespace L_1_4
             CH.WriteSeparator();
 
             if (n == 1)
+            {
                 Console.WriteLine(noPrimeMsg);
+            }
             else if (n >= 2)
             {
                 Console.Write(outMsg, 2);
 
-                
 
                 for (uint number = 2; number <= n; number++)
                 {
-                    bool isPrime = false;
+                    var isPrime = false;
 
                     for (uint oldNumber = 2; oldNumber <= Math.Ceiling(Math.Sqrt(number)); ++oldNumber)
                         if (number % oldNumber != 0)
@@ -45,7 +46,7 @@ namespace L_1_4
                             break;
                         }
 
-                    if(isPrime) Console.Write(outMsg, number);
+                    if (isPrime) Console.Write(outMsg, number);
                 }
             }
 

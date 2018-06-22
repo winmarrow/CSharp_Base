@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Abstract\Logger.cs" />
     <Compile Include="ConsoleHelpers\ConsoleHelper.cs" />
     <Compile Include="ConsoleHelpers\ConsoleLogger.cs" />

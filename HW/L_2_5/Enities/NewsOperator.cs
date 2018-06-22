@@ -9,8 +9,21 @@ namespace L_2_5.Enities
 {
     public class NewsOperator : INewsOperator
     {
-        private event EventHandler<NewNewsEventArgs> NewNewsAdded;
         private readonly List<News> _news = new List<News>();
+
+        public News this[int index] => index >= 0 && index < _news.Count ? _news[index] : new News();
+
+        public void Subscribe(INewsSubscriber newsSubscriber)
+        {
+            NewNewsAdded += newsSubscriber.OnNewNews;
+        }
+
+        public void Unsubscribe(INewsSubscriber newsSubscriber)
+        {
+            NewNewsAdded -= newsSubscriber.OnNewNews;
+        }
+
+        private event EventHandler<NewNewsEventArgs> NewNewsAdded;
 
         public AddResult AddNews(News news)
         {
@@ -19,7 +32,7 @@ namespace L_2_5.Enities
             _news.Add(news);
             Console.WriteLine("New news added");
 
-            NewNewsAdded?.Invoke(this, new NewNewsEventArgs(news.Category, _news.Count - 1));
+            NewNewsAdded?.Invoke(this, new NewNewsEventArgs(news));
 
             return new AddResult();
         }
@@ -27,8 +40,8 @@ namespace L_2_5.Enities
         public IEnumerable<News> GetAll()
         {
             return _news;
-
         }
+
         public IEnumerable<News> GetAllByCategory(NewsCategory category)
         {
             return _news.Where(news => news.Category.HasFlag(category)).ToList();
@@ -38,27 +51,5 @@ namespace L_2_5.Enities
         {
             return this[index];
         }
-
-        //public News this[int index]
-        //{
-        //    get
-        //    {
-        //        if (index < 0 && index > _news.Count - 1) return new News();
-        //        return _news[index];
-        //    }
-        //}
-        // TODO Да ладно вы же используете новый синтаксис, а это всего лишь 6.0
-        public News this[int index] => index >= 0 && index < _news.Count ? _news[index] : new News();
-
-        public void Subscribe(INewsSubscriber newsSubscriber)
-        {
-            NewNewsAdded += newsSubscriber.OnNewNews;
-        }
-        public void Unsubscribe(INewsSubscriber newsSubscriber)
-        {
-            NewNewsAdded -= newsSubscriber.OnNewNews;
-        }
-
-
     }
 }

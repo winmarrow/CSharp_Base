@@ -9,37 +9,11 @@ namespace SharedLib.ConsoleHelpers
         private const string StringInputTemplate = "{0}: ";
         private const string ChoiceTemplate = "{0,3} {1}";
 
-        #region Separator
-
-        private static string _separatorString;
-        public static string SeparatorString
-        {
-            get
-            {
-                if (string.IsNullOrWhiteSpace(_separatorString) || _separatorString.Length != Console.BufferWidth)
-                    _separatorString = new string(Settings.SeparatorChar, Console.BufferWidth);
-
-                return _separatorString;
-            }
-        }
-
-        public static void WriteSeparator(ConsoleColor color = Settings.ConsoleOutputColor)
-        {
-            ConsoleColor previosColor = Console.ForegroundColor;
-            SetConsoleColor(color);
-
-            Console.Write(SeparatorString);
-
-            SetConsoleColor(previosColor);
-        }
-
-        #endregion
-
         #region Cleaner
 
         public static void ClearLine(int lines = 1)
         {
-            for (int i = 1; i <= lines; i++)
+            for (var i = 1; i <= lines; i++)
             {
                 Console.SetCursorPosition(0, Console.CursorTop - 1);
                 Console.Write(new string(' ', Console.WindowWidth));
@@ -59,10 +33,10 @@ namespace SharedLib.ConsoleHelpers
                 Console.Write(StringInputTemplate, message);
             }
 
-            ConsoleColor previosColor = Console.ForegroundColor;
+            var previosColor = Console.ForegroundColor;
             SetConsoleColor(color);
 
-            string tempString = Console.ReadLine();
+            var tempString = Console.ReadLine();
 
             SetConsoleColor(previosColor);
 
@@ -71,80 +45,28 @@ namespace SharedLib.ConsoleHelpers
 
         #endregion
 
-        #region Asker
-
-        public static TEnum GetChoiceFromUser<TEnum>(bool removeAfterChoice = false) where TEnum : struct
-        {
-            Type enumType = typeof(TEnum);
-
-            if (!enumType.IsEnum || Enum.GetValues(enumType).Length < 2)
-                throw new ArgumentException("Type parameter must be an enum with two items", nameof(TEnum));
-
-            var enumValues = Enum.GetNames(typeof(TEnum));
-            return (TEnum)Enum.Parse(typeof(TEnum), GetChoiceFromUser(enumValues, removeAfterChoice).ChoisedString);
-        }
-
-        public static ChoiceResult GetChoiceFromUser(string[] choices, bool removeAfterChoice = false, bool canBeReject = false)
-        {
-            Console.CursorVisible = false;
-
-            WriteSeparator();
-
-            if (canBeReject)
-            {
-                Console.WriteLine("Use Escape button to reject this choice");
-                WriteSeparator();
-            }
-
-            int currentIndex = 0;
-            int topCursorPosition = Console.CursorTop;
-
-            do
-            {
-                Console.SetCursorPosition(0, topCursorPosition);
-
-                for (int i = 0; i < choices.Length; i++)
-                    Console.WriteLine(ChoiceTemplate, currentIndex == i ? "=>" : String.Empty, choices[i]);
-
-                var key = Console.ReadKey(true).Key;
-
-                if (key == ConsoleKey.UpArrow) currentIndex = --currentIndex < 0 ? choices.Length - 1 : currentIndex;
-                else if (key == ConsoleKey.DownArrow) currentIndex = ++currentIndex % choices.Length;
-                else if (key == ConsoleKey.RightArrow || key == ConsoleKey.Enter) break;
-                else if (canBeReject && key == ConsoleKey.Escape)
-                    return new ChoiceResult(-1, string.Empty, true);
-
-            } while (true);
-
-            if (removeAfterChoice) ClearLine(choices.Length + (canBeReject ? 3 : 1));
-
-            Console.CursorVisible = true;
-            return new ChoiceResult(currentIndex, choices[currentIndex]);
-
-        }
-
-        #endregion
-
 
         #region Draw Rectangle
 
-        public static void DrawRect(Position topLeftPosition, Size innerSize, ConsoleColor color = ConsoleColor.White, char backgroundChar = ' ')
+        public static void DrawRect(Position topLeftPosition, Size innerSize, ConsoleColor color = ConsoleColor.White,
+            char backgroundChar = ' ')
         {
-            char borderTopBottomChar = '═';
-            char borderLeftRightChar = '║';
+            var borderTopBottomChar = '═';
+            var borderLeftRightChar = '║';
 
-            string borderTopStr = $"╔{new string(borderTopBottomChar, innerSize.Width)}╗";
-            string borderLineStr = $"{borderLeftRightChar}{new string(backgroundChar, innerSize.Width)}{borderLeftRightChar}";
-            string borderBottompStr = $"╚{new string(borderTopBottomChar, innerSize.Width)}╝";
+            var borderTopStr = $"╔{new string(borderTopBottomChar, innerSize.Width)}╗";
+            var borderLineStr =
+                $"{borderLeftRightChar}{new string(backgroundChar, innerSize.Width)}{borderLeftRightChar}";
+            var borderBottompStr = $"╚{new string(borderTopBottomChar, innerSize.Width)}╝";
 
             SetConsoleColor(color);
 
-            Position lastCursorPosition = new Position(Console.CursorLeft, Console.CursorTop);
+            var lastCursorPosition = new Position(Console.CursorLeft, Console.CursorTop);
 
             Console.SetCursorPosition(topLeftPosition.Left, topLeftPosition.Top);
             Console.Write(borderTopStr);
 
-            int lastLine = topLeftPosition.Top + innerSize.Height;
+            var lastLine = topLeftPosition.Top + innerSize.Height;
 
             while (Console.CursorTop < lastLine)
             {
@@ -173,5 +95,84 @@ namespace SharedLib.ConsoleHelpers
             Console.ForegroundColor = color;
         }
 
+        #region Separator
+
+        private static string _separatorString;
+
+        public static string SeparatorString
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(_separatorString) || _separatorString.Length != Console.BufferWidth)
+                    _separatorString = new string(Settings.SeparatorChar, Console.BufferWidth);
+
+                return _separatorString;
+            }
+        }
+
+        public static void WriteSeparator(ConsoleColor color = Settings.ConsoleOutputColor)
+        {
+            var previosColor = Console.ForegroundColor;
+            SetConsoleColor(color);
+
+            Console.Write(SeparatorString);
+
+            SetConsoleColor(previosColor);
+        }
+
+        #endregion
+
+        #region Asker
+
+        public static TEnum GetChoiceFromUser<TEnum>(bool removeAfterChoice = false) where TEnum : struct
+        {
+            var enumType = typeof(TEnum);
+
+            if (!enumType.IsEnum || Enum.GetValues(enumType).Length < 2)
+                throw new ArgumentException("Type parameter must be an enum with two items", nameof(TEnum));
+
+            var enumValues = Enum.GetNames(typeof(TEnum));
+            return (TEnum) Enum.Parse(typeof(TEnum), GetChoiceFromUser(enumValues, removeAfterChoice).ChoisedString);
+        }
+
+        public static ChoiceResult GetChoiceFromUser(string[] choices, bool removeAfterChoice = false,
+            bool canBeReject = false)
+        {
+            Console.CursorVisible = false;
+
+            WriteSeparator();
+
+            if (canBeReject)
+            {
+                Console.WriteLine("Use Escape button to reject this choice");
+                WriteSeparator();
+            }
+
+            var currentIndex = 0;
+            var topCursorPosition = Console.CursorTop;
+
+            do
+            {
+                Console.SetCursorPosition(0, topCursorPosition);
+
+                for (var i = 0; i < choices.Length; i++)
+                    Console.WriteLine(ChoiceTemplate, currentIndex == i ? "=>" : string.Empty, choices[i]);
+
+                var key = Console.ReadKey(true).Key;
+
+                if (key == ConsoleKey.UpArrow) currentIndex = --currentIndex < 0 ? choices.Length - 1 : currentIndex;
+                else if (key == ConsoleKey.DownArrow) currentIndex = ++currentIndex % choices.Length;
+                else if (key == ConsoleKey.RightArrow || key == ConsoleKey.Enter) break;
+                else if (canBeReject && key == ConsoleKey.Escape)
+                    return new ChoiceResult(-1, string.Empty, true);
+            } while (true);
+
+            if (removeAfterChoice) ClearLine(choices.Length + (canBeReject ? 3 : 1));
+
+            Console.CursorVisible = true;
+            return new ChoiceResult(currentIndex, choices[currentIndex]);
+        }
+
+        #endregion
     }
 }

@@ -6,6 +6,7 @@ namespace L_2_4.Task2
     public delegate int StudentSortDelegate(Student student1, Student student2);
 
     public delegate bool StudentSelectorDelegate(Student student);
+
     public delegate void StudentActionDelegate(Student student);
 
     public class Group
@@ -32,7 +33,5 @@ namespace L_2_4.Task2
             foreach (var student in _students.Where(student => studentSelector(student)))
                 studentAction(student);
         }
-
-
     }
 }

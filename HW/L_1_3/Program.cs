@@ -3,9 +3,9 @@ using CH = SharedLib.ConsoleHelpers.ConsoleHelper;
 
 namespace L_1_3
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             CH.SetConsoleOutputEncoding();
             CH.SetConsoleColor();
@@ -15,24 +15,28 @@ namespace L_1_3
             const string inputMsg1 = "Введите cумму кредитования, \u00A4";
             const string inputMsg2 = "Введите ставку кредитования, % [1 - 100% как 15,5% ]";
             const string paymentTypeMsg = "Выберите вид платежа:";
-            const string paymentTypeMsg1 = "1 - аннуитетный платеж - это равный по сумме ежемесячный платеж по кредиту;";
-            const string paymentTypeMsg2 = "2 - дифференцированный платеж -  это ежемесячный платеж, уменьшающийся к концу срока кредитования.";
+            const string paymentTypeMsg1 =
+                "1 - аннуитетный платеж - это равный по сумме ежемесячный платеж по кредиту;";
+            const string paymentTypeMsg2 =
+                "2 - дифференцированный платеж -  это ежемесячный платеж, уменьшающийся к концу срока кредитования.";
             const string invalidInputMsg = "Введены неверные значения...";
-            const string tableLineMsg = " | {0,6} | {1,13:0.##}\u00A4 | {2,13:0.##}\u00A4 | {3,13:0.##}\u00A4 | {4,13:0.##}\u00A4 |";
+            const string tableLineMsg =
+                " | {0,6} | {1,13:0.##}\u00A4 | {2,13:0.##}\u00A4 | {3,13:0.##}\u00A4 | {4,13:0.##}\u00A4 |";
             const string tableFooterLineMsg = " | Итого: | {0,30:0.##}\u00A4 | {1,13:0.##}\u00A4 | {2,13:0.##}\u00A4 |";
 
             CH.WriteSeparator();
 
             //input
-            string creditAmountString = CH.GetStringFromConsole(inputMsg1);
-            string creditRateString = CH.GetStringFromConsole(inputMsg2);
+            var creditAmountString = CH.GetStringFromConsole(inputMsg1);
+            var creditRateString = CH.GetStringFromConsole(inputMsg2);
             CH.WriteSeparator();
 
-            bool amountIsInvalid = !decimal.TryParse(creditAmountString, out decimal originalCreditAmount);
-            bool rateIsInvalid = !double.TryParse(creditRateString, out double creditInterestRate);
+            var amountIsInvalid = !decimal.TryParse(creditAmountString, out var originalCreditAmount);
+            var rateIsInvalid = !double.TryParse(creditRateString, out var creditInterestRate);
 
 
-            if (amountIsInvalid || rateIsInvalid || originalCreditAmount <= 1 || creditInterestRate < 1 || creditInterestRate > 100)
+            if (amountIsInvalid || rateIsInvalid || originalCreditAmount <= 1 || creditInterestRate < 1 ||
+                creditInterestRate > 100)
             {
                 Console.WriteLine(invalidInputMsg);
                 Console.ReadKey();
@@ -41,14 +45,14 @@ namespace L_1_3
 
 
             Console.WriteLine(paymentTypeMsg);
-            int choosedStringIndex = CH.GetChoiceFromUser(new[] { paymentTypeMsg1, paymentTypeMsg2 }, true).Item1;
+            var choosedStringIndex = CH.GetChoiceFromUser(new[] {paymentTypeMsg1, paymentTypeMsg2}, true).ChoisedIndex;
 
             CH.WriteSeparator();
 
-            
-            decimal sumOfInterestCharges = 0m;
-            decimal sumOfPayments = 0m;
-            decimal debt = originalCreditAmount;
+
+            var sumOfInterestCharges = 0m;
+            var sumOfPayments = 0m;
+            var debt = originalCreditAmount;
 
             creditInterestRate *= 0.01;
 
@@ -58,16 +62,16 @@ namespace L_1_3
 
             if (choosedStringIndex == 0) //аннуитетный платеж
             {
-                double monthlyCreditInterestRate = creditInterestRate / 12;
-                decimal amountOfPayment = originalCreditAmount *
-                                          (decimal)(monthlyCreditInterestRate +
-                                                     monthlyCreditInterestRate /
-                                                     (Math.Pow(1 + monthlyCreditInterestRate, 12d) - 1d));
+                var monthlyCreditInterestRate = creditInterestRate / 12;
+                var amountOfPayment = originalCreditAmount *
+                                      (decimal) (monthlyCreditInterestRate +
+                                                 monthlyCreditInterestRate /
+                                                 (Math.Pow(1 + monthlyCreditInterestRate, 12d) - 1d));
 
-                for (int period = 1; period <= 12; period++)
+                for (var period = 1; period <= 12; period++)
                 {
-                    decimal interestCharges = debt * (decimal)monthlyCreditInterestRate;
-                    decimal repaymentOfCredit = amountOfPayment - interestCharges;
+                    var interestCharges = debt * (decimal) monthlyCreditInterestRate;
+                    var repaymentOfCredit = amountOfPayment - interestCharges;
 
                     Console.WriteLine(tableLineMsg, period, debt, interestCharges,
                         repaymentOfCredit, amountOfPayment);
@@ -80,14 +84,14 @@ namespace L_1_3
             }
             else //дифференцированный платеж
             {
-                decimal repaymentOfCredit = originalCreditAmount / numberOfPeriods;
-                int currentYear = DateTime.Today.Year;
+                var repaymentOfCredit = originalCreditAmount / numberOfPeriods;
+                var currentYear = DateTime.Today.Year;
 
-                for (int period = 1; period <= 12; period++)
+                for (var period = 1; period <= 12; period++)
                 {
-                    decimal interestCharges =
-                        debt * (decimal)(creditInterestRate * DateTime.DaysInMonth(currentYear, period) / 365d);
-                    decimal amountOfPayment = repaymentOfCredit + interestCharges;
+                    var interestCharges =
+                        debt * (decimal) (creditInterestRate * DateTime.DaysInMonth(currentYear, period) / 365d);
+                    var amountOfPayment = repaymentOfCredit + interestCharges;
 
                     Console.WriteLine(tableLineMsg, period, debt, interestCharges,
                         repaymentOfCredit, amountOfPayment);

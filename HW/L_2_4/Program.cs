@@ -7,9 +7,9 @@ using CH = SharedLib.ConsoleHelpers.ConsoleHelper;
 
 namespace L_2_4
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             CH.SetConsoleColor();
             CH.SetConsoleOutputEncoding();
@@ -25,8 +25,8 @@ namespace L_2_4
             Console.ReadKey();
         }
 
-        static void
-            TaskOne() //Тут я тупо не мог ппонять задание, то ли нужна сортировка, а может выборка -Ю налепил лишних методов
+        private static void
+            TaskOne()
         {
             // TODO Задача 1 Делегаты и методы
             /*
@@ -38,13 +38,12 @@ namespace L_2_4
              4. Вывести книги написаны в названии которых есть слово "мир"
              */
             var catalog = new Catalog();
-            catalog.Books = new List<Book>()
+            catalog.Books = new List<Book>
             {
-                // TODO Добавить книги
-                new Book() {Title = "Book 1 About eat", DoP = new DateTime(1984, 1, 1)},
-                new Book() {Title = "Book 2 About our little world", DoP = new DateTime(1983, 1, 1)},
-                new Book() {Title = "Book 3 About cars", DoP = new DateTime(1988, 1, 1)},
-                new Book() {Title = "Book 4 Around the world in One tick", DoP = new DateTime(1999, 1, 1)},
+                new Book {Title = "Book 1 About eat", DoP = new DateTime(1984, 1, 1)},
+                new Book {Title = "Book 2 About our little world", DoP = new DateTime(1983, 1, 1)},
+                new Book {Title = "Book 3 About cars", DoP = new DateTime(1988, 1, 1)},
+                new Book {Title = "Book 4 Around the world in One tick", DoP = new DateTime(1999, 1, 1)}
             };
 
             var booksBefore85Year = catalog.SelectBooks(BookSorter.IsBookBefore85Year);
@@ -58,7 +57,7 @@ namespace L_2_4
                 Console.WriteLine(book);
         }
 
-        static void TaskTwo()
+        private static void TaskTwo()
         {
             // TODO Задача 2 Делегаты и анонимные методы и/или лямбда выражения
             /* 
@@ -72,7 +71,7 @@ namespace L_2_4
 
             const string studentTemplate = "{0} {1} - Avg mark: {2}";
 
-            var group = new Group(new Student[]
+            var group = new Group(new[]
             {
                 new Student(),
                 new Student(),
@@ -80,7 +79,7 @@ namespace L_2_4
                 new Student(),
                 new Student(),
                 new Student(),
-                new Student(),
+                new Student()
             });
 
             group.Sort((student1, student2) => (int) (student1.AvgMark - student2.AvgMark));
@@ -102,7 +101,7 @@ namespace L_2_4
                 });
         }
 
-        static void TaskThree()
+        private static void TaskThree()
         {
             // TODO Задача 3* Func, Action + =>
             // В задаче нельзя объявлять делегаты
@@ -118,16 +117,15 @@ namespace L_2_4
 
             const string carTempolate = " {0} - {1} Price: {2}";
 
-            var group = new CarPark()
+            var group = new CarPark
             {
-                AddNewCarAction = (car) =>
+                AddNewCarAction = car =>
                 {
                     Console.WriteLine($"- {car.Brand} {car.Model} was added to the park. It costs {car.Price} $");
                 },
-                Cars = new List<Car>()
+                Cars = new List<Car>
                 {
-                    // TODO add cars
-                    new FuelCar()
+                    new FuelCar
                     {
                         Brand = "Brand 1",
                         Model = "Model A",
@@ -135,7 +133,7 @@ namespace L_2_4
                         ReleasedYead = 1990,
                         TankSize = 100
                     },
-                    new FuelCar()
+                    new FuelCar
                     {
                         Brand = "Brand 2",
                         Model = "Model A",
@@ -143,7 +141,7 @@ namespace L_2_4
                         ReleasedYead = 1990,
                         TankSize = 100
                     },
-                    new FuelCar()
+                    new FuelCar
                     {
                         Brand = "Brand 3",
                         Model = "Model A",
@@ -151,14 +149,14 @@ namespace L_2_4
                         ReleasedYead = 1990,
                         TankSize = 100
                     },
-                    new FuelCar()
+                    new FuelCar
                     {
                         Brand = "Brand 1",
                         Model = "Model A",
                         Price = 23400m,
                         ReleasedYead = 1990,
                         TankSize = 100
-                    },
+                    }
                 }
             };
             //Before sort

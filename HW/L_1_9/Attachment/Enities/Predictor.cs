@@ -6,10 +6,9 @@ namespace L_1_9.Attachment.Enities
 {
     public class Predictor
     {
-
         public void Predict()
         {
-            CH.WriteSeparator(); 
+            CH.WriteSeparator();
             Console.WriteLine("Please choice prediction interval: ");
             var choiceResult = CH.GetChoiceFromUser<Period>(true);
             CH.ClearLine(2);
@@ -20,11 +19,14 @@ namespace L_1_9.Attachment.Enities
         {
             var rand = new Random((int) DateTime.Now.Ticks);
 
-            string modificatorString = Enum.GetName(typeof(Modificator), rand.Next(Enum.GetNames(typeof(Modificator)).Length - 1)) ?? String.Empty;
-            string periodString = Enum.GetName(typeof(Period), period);
+            var modificatorString =
+                Enum.GetName(typeof(Modificator), rand.Next(Enum.GetNames(typeof(Modificator)).Length - 1)) ??
+                string.Empty;
+            var periodString = Enum.GetName(typeof(Period), period);
 
 
-            return $"You will have \"{modificatorString} {(rand.Next(100) <= 50 ? "failure" : "luck")}\" on {periodString}";
+            return
+                $"You will have \"{modificatorString} {(rand.Next(100) <= 50 ? "failure" : "luck")}\" on {periodString}";
             ;
         }
     }

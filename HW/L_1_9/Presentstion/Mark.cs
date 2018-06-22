@@ -4,20 +4,23 @@ namespace L_1_9.Presentstion
 {
     public struct Mark : IComparable
     {
-        // TODO use auto properties
-        public DateTime Date;
-        public string LectureName;
-        public int MarkNumber;
+        public DateTime Date { get; }
+        public string LectureName { get; }
+        public int MarkNumber { get; }
 
         public int CompareTo(object obj)
         {
-            // TODO Не безопасно. Можете получить Invalid Cast Exception
-            //Mark mark = (Mark) obj;
-            //return mark.MarkNumber - this.MarkNumber;
-            // TODO либо перенести тернарник внутрь CompareTo
-            return obj is Mark mark 
-                ? this.MarkNumber.CompareTo(mark.MarkNumber) 
-                : this.MarkNumber.CompareTo(null);
+            return obj is Mark mark
+                ? MarkNumber.CompareTo(mark.MarkNumber)
+                : MarkNumber.CompareTo(null);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Mark mark
+                   && MarkNumber == mark.MarkNumber
+                   && LectureName == mark.LectureName
+                   && Date == mark.Date;
         }
 
         public static bool IsMarkValid(Mark mark)

@@ -3,14 +3,14 @@ using L_2_1.Enums;
 
 namespace L_2_1.Entities
 {
-    public class Student :Human
+    public class Student : Human
     {
-        public Knowledge GapsInKnowledge { get; }
-
         public Student(string fullName, Knowledge gapsInKnowledge) : base(fullName)
         {
             GapsInKnowledge = gapsInKnowledge;
         }
+
+        public Knowledge GapsInKnowledge { get; }
 
         public virtual void Learn(Knowledge lectureType)
         {
@@ -18,10 +18,5 @@ namespace L_2_1.Entities
                 Console.WriteLine($"{this} is learning on {lectureType} lecture");
             else Sleep();
         }
-
-        //public override string ToString()
-        //{
-        //    //return $"Student: {FullName}";
-        //}
     }
 }

@@ -13,7 +13,8 @@ namespace L_2_4.Task1
             var result = new List<Book>();
 
             foreach (var book in Books)
-                if (bookSelector(book))result.Add(book);
+                if (bookSelector(book))
+                    result.Add(book);
 
             return result;
         }

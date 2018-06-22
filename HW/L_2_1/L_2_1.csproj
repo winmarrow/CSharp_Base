@@ -46,7 +46,6 @@
     <Compile Include="Entities\Lecturrer.cs" />
     <Compile Include="Entities\Students\HumanistStudent.cs" />
     <Compile Include="Entities\Lection.cs" />
-    <Compile Include="Entities\Students\AthleteStudent.cs" />
     <Compile Include="Entities\Student.cs" />
     <Compile Include="Entities\Students\TechStudent.cs" />
     <Compile Include="Entities\Univercity.cs" />

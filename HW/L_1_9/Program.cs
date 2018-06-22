@@ -4,14 +4,14 @@ using CH = SharedLib.ConsoleHelpers.ConsoleHelper;
 
 namespace L_1_9
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             CH.SetConsoleOutputEncoding();
             CH.SetConsoleColor();
 
-            switch (CH.GetChoiceFromUser(new[] { "Attachment", "Presentation" }, true, true).ChoisedIndex)
+            switch (CH.GetChoiceFromUser(new[] {"Attachment", "Presentation"}, true, true).ChoisedIndex)
             {
                 case 0:
                     new Predictor().Predict();

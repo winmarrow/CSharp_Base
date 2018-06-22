@@ -4,9 +4,9 @@ using CH = SharedLib.ConsoleHelpers.ConsoleHelper;
 
 namespace L_1_6
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             CH.SetConsoleOutputEncoding();
             CH.SetConsoleColor();
@@ -18,11 +18,11 @@ namespace L_1_6
 
             var purchasesList = new Dictionary<string, decimal>();
 
-            decimal filterValue = 0m;
-            int filterDirection = 0;
-            bool isPriceVisible = false;
+            var filterValue = 0m;
+            var filterDirection = 0;
+            var isPriceVisible = false;
 
-            int selectedMenuIndex = -1;
+            var selectedMenuIndex = -1;
             string[] menuOptions =
             {
                 "Add purchase", //0
@@ -45,19 +45,22 @@ namespace L_1_6
                     selectedMenuIndex = CH.GetChoiceFromUser(menuOptions).ChoisedIndex;
                 }
                 else
-                { 
+                {
                     switch (selectedMenuIndex)
                     {
                         case 0:
                             var newPurchase = GetNewPurchaseInfo();
 
                             if (purchasesList.ContainsKey(newPurchase.Item1))
+                            {
                                 Console.WriteLine("Purchase already exist in list or invalid");
+                            }
                             else
                             {
                                 purchasesList.Add(newPurchase.Item1, newPurchase.Item2);
                                 Console.WriteLine("Purchase was added to list");
                             }
+
                             break;
 
                         case 1:
@@ -77,7 +80,7 @@ namespace L_1_6
 
                         case 2:
                             Console.WriteLine("Do you want to see prices in the purchases list?");
-                            isPriceVisible = CH.GetChoiceFromUser(new[]{ "No", "Yes" }).ChoisedIndex != 0;
+                            isPriceVisible = CH.GetChoiceFromUser(new[] {"No", "Yes"}).ChoisedIndex != 0;
                             break;
 
                         case 3:
@@ -114,11 +117,11 @@ namespace L_1_6
                 Console.WriteLine(filtrStr, filterDirection == 2 ? "higher" : "lower", filterValue);
                 CH.WriteSeparator();
             }
+
             Console.WriteLine(isPriceVisible ? listStrWithPrice : listStrWithoutPrice, "Purchase name", "Price");
 
             foreach (var keyValuePair in purchasesList)
             {
-                // TODO Немного 7.0 магии
                 switch (filterDirection)
                 {
                     case 1 when keyValuePair.Value > filterValue:
@@ -143,7 +146,7 @@ namespace L_1_6
             {
                 CH.WriteSeparator();
 
-                string priceFilterValueStr = CH.GetStringFromConsole($"filter value [{0.5m:C}/{9.99m:C}]");
+                var priceFilterValueStr = CH.GetStringFromConsole($"filter value [{0.5m:C}/{9.99m:C}]");
 
                 isInputValid = decimal.TryParse(priceFilterValueStr, out priceFilterValue);
             } while (!isInputValid);
@@ -163,10 +166,11 @@ namespace L_1_6
                 CH.WriteSeparator();
 
                 purchaseName = CH.GetStringFromConsole("Please input the purchase name [Butter/Wine/Caviar/ e.t.c.]");
-                string purchasePriseStr = CH.GetStringFromConsole($"Please input the purchase price [{0.5m:C}/{9.99m:C}/ e.t.c.]");
+                var purchasePriseStr =
+                    CH.GetStringFromConsole($"Please input the purchase price [{0.5m:C}/{9.99m:C}/ e.t.c.]");
 
-                bool isValidPurchaseName = !string.IsNullOrWhiteSpace(purchaseName);
-                bool isValidPurchasePrice = decimal.TryParse(purchasePriseStr, out purchasePrice);
+                var isValidPurchaseName = !string.IsNullOrWhiteSpace(purchaseName);
+                var isValidPurchasePrice = decimal.TryParse(purchasePriseStr, out purchasePrice);
 
                 isInputValid = isValidPurchaseName && isValidPurchasePrice;
 

@@ -6,26 +6,25 @@ using SharedLib.Abstract;
 
 namespace L_2_2.Collections
 {
-    public class HomoSapiensCollection : Collection<HomoSapiens>
+    public class HumanCollection : Collection<Human>
     {
         private const string AlreadyExistErrorString = "Same item already exist in collection";
         private const string AddItemString = "Item was successfully added";
 
-        // TODO readonly;
-        private Logger _logger;
+        private readonly Logger _logger;
 
-        public HomoSapiensCollection(Logger logger)
+        public HumanCollection(Logger logger)
         {
             _logger = logger;
         }
 
-        public HomoSapiensCollection(Logger logger, IEnumerable<HomoSapiens> homoSapienses)
-            : base(homoSapienses.ToList())
+        public HumanCollection(Logger logger, IEnumerable<Human> human)
+            : base(human.ToList())
         {
             _logger = logger;
         }
 
-        protected override void InsertItem(int index, HomoSapiens item)
+        protected override void InsertItem(int index, Human item)
         {
             if (Contains(item))
             {
