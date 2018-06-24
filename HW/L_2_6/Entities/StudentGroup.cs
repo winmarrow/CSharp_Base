@@ -24,21 +24,27 @@ namespace L_2_6.Entities
             _students = students;
             _validator = validator;
 
-            SubscribeLoggerToEvents();
+            //SubscribeLoggerToEvents();
+            // TODO Никаких вызовов методов в конструкторах. 
+            OnCollectionChange += Students_OnCollectionChange;
+            OnInvalidInput += Student_OnInvalidInput;
         }
 
         public string GropName { get; set; }
-        public IEnumerable<Student> Students => _students.AsEnumerable();
+
+        // TODO Всё равно коллекция будет доступна только как перечисление.
+        // Так же можно для группы определить IEnumerable<Student> интерфейс сразу
+        public IEnumerable<Student> Students => _students; // _students.AsEnumerable();
         public Student this[int index] => _students[index];
 
         public event EventHandler<StudentCollectinChangedEventArgs> OnCollectionChange;
         public event EventHandler<InvalidStudentInputEventArgs> OnInvalidInput;
 
-        private void SubscribeLoggerToEvents()
-        {
-            OnCollectionChange += Students_OnCollectionChange;
-            OnInvalidInput += Student_OnInvalidInput;
-        }
+        //private void SubscribeLoggerToEvents()
+        //{
+        //    OnCollectionChange += Students_OnCollectionChange;
+        //    OnInvalidInput += Student_OnInvalidInput;
+        //}
 
 
         public void AddStudent(Student student)
@@ -72,8 +78,8 @@ namespace L_2_6.Entities
 
             if (!newStudents.Any()) return;
 
+            
             var index = 0;
-
             try
             {
                 for (; index < newStudents.Count; index++)
