@@ -43,8 +43,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enities\NewNewsEventArgs.cs" />
+    <Compile Include="Enities\NewsOperatorV2.cs" />
     <Compile Include="Enities\NewsSubscriber.cs" />
     <Compile Include="Interfaces\INewsOperator.cs" />
+    <Compile Include="Interfaces\INewsSubscriberV2.cs" />
     <Compile Include="Interfaces\INewsSubscriber.cs" />
     <Compile Include="Enities\News.cs" />
     <Compile Include="Enities\NewsOperator.cs" />

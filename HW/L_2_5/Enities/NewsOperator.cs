@@ -13,6 +13,11 @@ namespace L_2_5.Enities
 
         public News this[int index] => index >= 0 && index < _news.Count ? _news[index] : new News();
 
+        // TODO Тут 2 подхода
+        // 1. Если делаете методы, то приватным можете делать делегат, а не событие.
+        // 2. Если вы всё равно не делаете проверки внутри метода.
+        // То можно просто сделать публичное событие.
+   
         public void Subscribe(INewsSubscriber newsSubscriber)
         {
             NewNewsAdded += newsSubscriber.OnNewNews;
@@ -27,13 +32,14 @@ namespace L_2_5.Enities
 
         public AddResult AddNews(News news)
         {
-            if (!News.IsValid(news)) return new AddResult("News is invalid or news category don't exist");
+            // TODO А вот тут могли уже сделать отдельное событие для логирования результата =)
+            if (!News.IsValid(news)) 
+                return new AddResult("News is invalid or news category don't exist");
 
             _news.Add(news);
             Console.WriteLine("New news added");
 
             NewNewsAdded?.Invoke(this, new NewNewsEventArgs(news));
-
             return new AddResult();
         }
 

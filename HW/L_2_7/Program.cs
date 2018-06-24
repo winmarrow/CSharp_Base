@@ -7,6 +7,7 @@ using CH = SharedLib.Helpers.ConsoleHelper;
 
 namespace L_2_7
 {
+    // TODO Эх... даже не дали ничего про комментировать то...
     internal class Program
     {
         private static string MusicLibraryDir => "MusicLibrary\\Albums";
